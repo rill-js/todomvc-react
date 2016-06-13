@@ -1,2 +1,11 @@
+# NPM
 node_modules
+
+# Dist
 public
+
+# Editor
+*.sublime*
+
+# OSX
+*.DS_Store
