@@ -1,5 +1,4 @@
 {
-  "private": true,
   "description": "Isomorphic TodoMVC example with Rill",
   "babel": {
     "presets": [
@@ -13,22 +12,20 @@
   },
   "dependencies": {
     "@rill/body": "^1.1.1",
-    "@rill/html": "^2.0.7",
+    "@rill/html": "^2.0.8",
     "@rill/logger": "^1.0.1",
     "@rill/progress": "^1.0.1",
     "@rill/redirect": "^0.2.0",
     "@rill/session": "^5.0.2",
     "@rill/set": "^0.1.0",
     "@rill/static": "^0.5.0",
-    "as-html": "^1.1.0",
+    "as-html": "^2.0.0",
     "babel-polyfill": "^6.9.1",
     "babel-register": "^6.9.0",
     "classnames": "^2.2.5",
-    "i": "^0.3.5",
-    "npm": "^3.9.5",
-    "rill": "^0.6.2",
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0",
+    "rill": "^0.6.6",
+    "todomvc-app-css": "^2.0.6",
+    "todomvc-common": "^1.0.2",
     "uid": "0.0.2"
   },
   "devDependencies": {
@@ -36,8 +33,9 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.1"
   },
+  "private": true,
   "scripts": {
-    "build": "browserify js/app.js -t [babelify] > public/bundle.js",
+    "build": "test -d public || mkdir public; browserify js/app.js -t [babelify] > public/bundle.js",
     "start": "npm run build && node -r babel-register js/app.js"
   }
 }
