@@ -11,27 +11,27 @@
     ]
   },
   "dependencies": {
-    "@rill/body": "^1.1.1",
-    "@rill/html": "^2.0.8",
-    "@rill/logger": "^1.0.1",
-    "@rill/progress": "^1.0.1",
-    "@rill/redirect": "^0.2.0",
-    "@rill/session": "^5.0.2",
-    "@rill/set": "^0.1.0",
-    "@rill/static": "^0.5.0",
+    "@rill/body": "^1.2.1",
+    "@rill/html": "^4.0.0",
+    "@rill/logger": "^1.2.1",
+    "@rill/redirect": "^1.0.0",
+    "@rill/session": "^5.1.0",
+    "@rill/set": "^1.1.0",
+    "@rill/static": "^1.0.0",
     "as-html": "^2.0.0",
-    "babel-polyfill": "^6.9.1",
-    "babel-register": "^6.9.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-register": "^6.14.0",
     "classnames": "^2.2.5",
-    "rill": "^0.6.6",
+    "console-polyfill": "^0.2.3",
+    "rill": "^2.1.6",
     "todomvc-app-css": "^2.0.6",
     "todomvc-common": "^1.0.2",
     "uid": "0.0.2"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.3.0",
-    "browserify": "^13.0.1"
+    "browserify": "^13.1.0"
   },
   "private": true,
   "scripts": {

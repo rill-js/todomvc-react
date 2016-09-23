@@ -1,4 +1,5 @@
 // Polyfills
+import 'console-polyfill'
 import 'babel-polyfill'
 
 // Libraries
@@ -7,7 +8,6 @@ import rill from 'rill'
 // Middleware
 import serve from '@rill/static'
 import logger from '@rill/logger'
-import progress from '@rill/progress'
 import session from '@rill/session'
 import html from '@rill/html'
 import body from '@rill/body'
@@ -24,7 +24,6 @@ rill()
   .use(serve('node_modules/todomvc-common'))
   .use(serve('node_modules/todomvc-app-css'))
   .use(body())
-  .use(progress())
   .use(session())
   .use(logger())
   .use(html())

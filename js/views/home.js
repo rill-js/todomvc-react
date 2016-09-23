@@ -39,6 +39,7 @@ export default (app) => {
                 <div class="view">
                   <a href="/todos/toggle/${todo.id}">
                     <input class="toggle" type="checkbox" ${cx({ checked: todo.completed })}>
+                    <div class="cover"></div>
                   </a>
                   <a href="/todos/edit/${todo.id}"><label>${todo.text}</label></a>
                   <form action="/todos/remove/${todo.id}">

@@ -20,6 +20,13 @@ export default (app) => {
                 color: #4d4d4d;
                 text-decoration: none;
               }
+
+              /* Makes underlying input not clickable since we use links */
+              .todo-list a .cover {
+                position: absolute;
+                width: 40px;
+                height: 40px;
+              }
             </style>
           </head>
           <body>
