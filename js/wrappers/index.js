@@ -1,4 +1,5 @@
-import page from './page'
+import rill from 'rill'
+import pageWrapper from './page'
 
 /**
  * Setup all wrapping components.
@@ -6,6 +7,6 @@ import page from './page'
  * For example "/dashboard" may have a nav that could be a part of a wrapper since it is shared on
  * anything inside the dashboard.
  */
-export default (app) => {
-  app.setup(page)
-}
+export default rill()
+  // Run the page wrapper on every page.
+  .get('/*', pageWrapper)

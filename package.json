@@ -1,8 +1,10 @@
 {
+  "name": "todomvc-rill",
   "description": "Isomorphic TodoMVC example with Rill",
+  "version": "1.0.0",
   "babel": {
     "presets": [
-      "es2015"
+      "latest"
     ]
   },
   "browserify": {
@@ -12,30 +14,32 @@
   },
   "dependencies": {
     "@rill/body": "^1.2.1",
-    "@rill/html": "^4.0.0",
-    "@rill/logger": "^1.2.1",
+    "@rill/html": "^4.0.2",
+    "@rill/logger": "^2.1.1",
     "@rill/redirect": "^1.0.0",
-    "@rill/session": "^5.1.0",
+    "@rill/session": "^6.0.5",
     "@rill/set": "^1.1.0",
-    "@rill/static": "^1.0.0",
-    "as-html": "^2.0.0",
-    "babel-polyfill": "^6.13.0",
-    "babel-register": "^6.14.0",
+    "@rill/static": "^2.0.0",
+    "as-html": "^2.0.1",
+    "babel-polyfill": "^6.16.0",
+    "babel-register": "^6.16.3",
     "classnames": "^2.2.5",
     "console-polyfill": "^0.2.3",
-    "rill": "^2.1.6",
+    "rill": "^2.4.0",
     "todomvc-app-css": "^2.0.6",
     "todomvc-common": "^1.0.2",
     "uid": "0.0.2"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-latest": "^6.16.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0"
   },
+  "main": "js/app.js",
   "private": true,
   "scripts": {
-    "build": "test -d public || mkdir public; browserify js/app.js -t [babelify] > public/bundle.js",
+    "build": "npm run mkdir-public && browserify js/app.js -t [babelify] > public/bundle.js",
+    "mkdir-public": "test -d public || mkdir public;",
     "start": "npm run build && node -r babel-register js/app.js"
   }
 }
