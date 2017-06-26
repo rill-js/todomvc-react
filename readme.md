@@ -29,13 +29,13 @@ Rill also works perfectly as a stand alone [nodejs](https://nodejs.org) server o
 
 ## Implementation
 
-Uses Rill with "@rill/html" rendering to create an isomorphic/universal TodoMVC app.
+Uses Rill with [@rill/react](https://github.com/rill-js/react) middleware to create an isomorphic/universal TodoMVC app.
 
-Templates are created with [as-html](https://github.com/DylanPiercey/as-html) which enables a simple templating language with es6 tagged templates. You can easily swap this out by using a different templating engine or a different rendering engine such as "@rill/react".
+Templates are created with [React](https://facebook.github.io/react/blog/) but you can can easily swap this out by using a different templating engine middleware such as [@rill/html](https://github.com/rill-js/html) or writing your own.
 
-Browserify and babel are used to bundle the app for the browser.
+Webpack and babel are used to bundle the app for both the server and browser for optimum performance.
 
-Use "npm start" to build and run the app yourself.
+Use "npm run watch" to build and run the app yourself (starts up on port 8080).
 
 ## Credit
 

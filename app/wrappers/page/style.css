@@ -1,0 +1,53 @@
+@import 'todomvc-common/base.css';
+@import 'todomvc-app-css/index.css';
+
+.todo-list a {
+  color: #4d4d4d;
+  text-decoration: none;
+}
+
+/* Makes underlying input not clickable since we use links */
+.todo-list a .cover {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+
+.create-form button,
+.update-form button {
+  display: none;
+}
+
+.update-form a {
+  z-index:998;
+  position:fixed;
+  top:0; bottom:0; left:0; right:0;
+}
+
+.update-form .edit {
+  z-index: 999;
+}
+
+.todo-list li .toggle {
+  height: 40px;
+  text-align: center;
+  width: 40px;
+  /* auto, since non-WebKit browsers doesn't support input styling */
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  border: none;
+  /* Mobile Safari */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.todo-list li .toggle:after {
+	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
+}
+
+.todo-list li .toggle:checked:after {
+	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+}

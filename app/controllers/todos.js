@@ -3,6 +3,7 @@ import uid from 'uid'
 // Create a new todo.
 export function create ({ req, res, session }) {
   const todos = session.get('todos') || []
+  if (!req.body.text) return
   todos.push({ id: uid(), text: req.body.text })
   session.set('todos', todos)
   res.redirect('back')
@@ -32,7 +33,7 @@ export function closeById ({ req, res, session }) {
 export function updateById ({ req, res, session }) {
   const todos = session.get('todos') || []
   const todo = todos.find(todo => todo.id === req.params.id)
-  if (!todo) return
+  if (!todo || !req.body.text) return
   todo.text = req.body.text
   todo.editing = false
   session.set('todos', todos)
@@ -52,7 +53,7 @@ export function toggleById ({ req, res, session }) {
 // Toggles all todos completion.
 export function toggleAll ({ req, res, session }) {
   const todos = session.get('todos') || []
-  todos.forEach(todo => todo.completed = !todo.completed)
+  todos.forEach(todo => { todo.completed = !todo.completed })
   session.set('todos', todos)
   res.redirect('back')
 }

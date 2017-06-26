@@ -1,45 +1,71 @@
 {
-  "name": "todomvc-rill",
+  "name": "@rill/todomvc-example",
   "description": "Isomorphic TodoMVC example with Rill",
-  "version": "1.0.0",
-  "babel": {
-    "presets": [
-      "latest"
-    ]
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  },
+  "version": "2.0.0",
+  "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "dependencies": {
-    "@rill/body": "^1.2.1",
-    "@rill/html": "^4.0.2",
+    "@rill/body": "^1.2.2",
+    "@rill/compress": "^1.0.4",
+    "@rill/etag": "^1.1.1",
+    "@rill/expose": "^1.0.0",
+    "@rill/fresh": "^1.0.0",
+    "@rill/helmet": "^1.1.0",
     "@rill/logger": "^2.1.1",
+    "@rill/polyfill": "^1.1.4",
+    "@rill/progress": "^2.0.3",
+    "@rill/react": "^3.1.1",
     "@rill/redirect": "^1.0.0",
-    "@rill/session": "^6.0.5",
-    "@rill/set": "^1.1.0",
+    "@rill/session": "^7.5.0",
     "@rill/static": "^2.0.0",
-    "as-html": "^2.0.1",
-    "babel-polyfill": "^6.16.0",
-    "babel-register": "^6.16.3",
+    "auto-sni": "^2.2.1",
     "classnames": "^2.2.5",
-    "console-polyfill": "^0.2.3",
-    "rill": "^2.4.0",
-    "todomvc-app-css": "^2.0.6",
-    "todomvc-common": "^1.0.2",
+    "ms": "^2.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "rill": "^5.0.5",
+    "source-map-support": "^0.4.15",
+    "todomvc-app-css": "^2.1.0",
+    "todomvc-common": "^1.0.3",
     "uid": "0.0.2"
   },
   "devDependencies": {
-    "babel-preset-latest": "^6.16.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.1.0"
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-react-require": "^3.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "babili-webpack-plugin": "^0.1.1",
+    "compression-webpack-plugin": "^0.4.0",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
+    "husky": "^0.14.1",
+    "imagemin-webpack-plugin": "^1.4.4",
+    "postcss-cssnext": "^2.11.0",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.6",
+    "pretty-error": "^2.1.0",
+    "spawn-server-webpack-plugin": "^1.7.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.5.0"
   },
-  "main": "js/app.js",
-  "private": true,
+  "keywords": [
+    "isomorphic",
+    "react",
+    "rill",
+    "todo-mvc",
+    "universal",
+    "webpack"
+  ],
+  "license": "MIT",
+  "main": "build/index.js",
   "scripts": {
-    "build": "npm run mkdir-public && browserify js/app.js -t [babelify] > public/bundle.js",
-    "mkdir-public": "test -d public || mkdir public;",
-    "start": "npm run build && node -r babel-register js/app.js"
+    "build": "webpack --progress --config ./config/prod/webpack.config.js",
+    "precommit": "npm run build && git add ./build --all",
+    "start": "node ./build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node ./config/dev/dev-server.js"
   }
 }

@@ -1,11 +1,15 @@
-# NPM
-node_modules
-
-# Dist
-public
-
-# Editor
+# Sublime
 *.sublime*
 
 # OSX
 *.DS_Store
+
+# Code Coverage
+coverage
+
+# NPM
+node_modules
+npm-debug.log
+
+# Built files
+build
