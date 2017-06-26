@@ -13,7 +13,7 @@
     "@rill/logger": "^2.1.1",
     "@rill/polyfill": "^1.1.4",
     "@rill/progress": "^2.0.3",
-    "@rill/react": "^3.1.1",
+    "@rill/react": "^3.2.0",
     "@rill/redirect": "^1.0.0",
     "@rill/session": "^7.5.0",
     "@rill/static": "^2.0.0",
