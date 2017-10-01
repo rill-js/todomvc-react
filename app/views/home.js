@@ -1,4 +1,4 @@
-import cx from 'classnames'
+import React from 'react'
 import Header from '../partials/header'
 import TodoList from '../partials/todo-list'
 import Footer from '../partials/footer'

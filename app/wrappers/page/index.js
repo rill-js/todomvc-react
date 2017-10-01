@@ -1,5 +1,5 @@
 import './style.css'
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 /**
  * This is an example wrapper.

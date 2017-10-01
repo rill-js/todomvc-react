@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { Component } from 'react'
+import React, { Component } from 'react'
 import TodoItem from './todo-item'
 
 export default class TodoList extends Component {
@@ -34,7 +34,7 @@ export default class TodoList extends Component {
               <a className={cx({ selected: props.filter === 'all' })} href='/'>All</a>
             </li>
             <li>
-              <a className={cx({ selected: props.filter === 'active' })} href='/active'>Active</a>
+              <a className={cx({ selected: props.filter === 'pending' })} href='/pending'>Active</a>
             </li>
             <li>
               <a className={cx({ selected: props.filter === 'completed' })} href='/completed'>Completed</a>
