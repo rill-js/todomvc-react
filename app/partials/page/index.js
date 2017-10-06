@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 /**
  * This is an example wrapper.
- * Wrappers are used to contain sub sections of an app, this particialar one wraps the entire contents with the document.
+ * Wrappers are used to contain sub sections of an app, this particular one wraps the entire contents with the document.
  */
 export default class Page extends Component {
   render () {

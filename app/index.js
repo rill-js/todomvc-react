@@ -13,8 +13,9 @@ import react from '@rill/react'
 import body from '@rill/body'
 import session from '@rill/session'
 import redirect from '@rill/redirect'
+import unhandled from '@rill/unhandled'
+import preloadMiddleware from './middleware/preload'
 import appCtrls from './controllers'
-import wrappers from './wrappers'
 import views from './views'
 
 export default router()
@@ -30,10 +31,10 @@ export default router()
   .use(logger())
   .use(expose())
   .use(react())
+  .use(unhandled(redirect('/404')))
   .at('/app/*', appCtrls)
-  .get(wrappers)
+  .use(preloadMiddleware)
   .get(views)
-  .get(redirect('/'))
   .listen({ port: 8081 }, () => {
     if (!process.browser && process.env.NODE_ENV === 'production') {
       process.stdout.write('server: Started at `http://localhost:8080`.')
