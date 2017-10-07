@@ -1,5 +1,6 @@
-# Sublime
+# Editors
 *.sublime*
+.vscode
 
 # OSX
 *.DS_Store
