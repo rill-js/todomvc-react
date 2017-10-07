@@ -15,7 +15,7 @@ import session from '@rill/session'
 import redirect from '@rill/redirect'
 import unhandled from '@rill/unhandled'
 import preloadMiddleware from './middleware/preload'
-import appCtrls from './controllers'
+import controllers from './controllers'
 import views from './views'
 
 export default router()
@@ -32,7 +32,7 @@ export default router()
   .use(expose())
   .use(react())
   .use(unhandled(redirect('/404')))
-  .at('/app/*', appCtrls)
+  .at('/app/*', controllers)
   .use(preloadMiddleware)
   .get(views)
   .listen({ port: 8081 }, () => {
