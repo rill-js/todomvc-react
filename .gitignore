@@ -10,6 +10,3 @@ coverage
 # NPM
 node_modules
 npm-debug.log
-
-# Built files
-build
