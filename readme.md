@@ -24,7 +24,7 @@ Rill also works perfectly as a stand alone [nodejs](https://nodejs.org) server o
 
 - [Issues](https://github.com/rill-js/rill/issues)
 - [Reddit](https://www.reddit.com/r/Rill/)
-* [Gitter Chat](https://gitter.im/rill-js/rill)
+- [Gitter Chat](https://gitter.im/rill-js/rill)
 
 
 ## Implementation
