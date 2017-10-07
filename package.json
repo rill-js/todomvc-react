@@ -65,7 +65,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "webpack --progress --config ./config/prod/webpack.config.js",
-    "precommit": "npm run build && git add ./build --all",
+    "precommit": "[[ ! $(git diff ./package-lock.json ./config/prod ./app) ]] || npm run build && git add ./build --all",
     "start": "node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node ./config/dev/dev-server.js"
