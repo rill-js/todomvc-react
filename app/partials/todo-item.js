@@ -9,7 +9,7 @@ export default class TodoItem extends Component {
         <div className='view'>
           <a href={`/app/todo/toggle/${props.id}`}>
             <input className='toggle' type='checkbox' defaultChecked={props.completed} />
-            <div className='cover' />
+            <label />
           </a>
           <a href={`/app/todo/open/${props.id}`}><label>{props.text}</label></a>
           <form action={`/app/todo/remove/${props.id}`}>
@@ -19,8 +19,7 @@ export default class TodoItem extends Component {
 
         {props.editing && (
           <form className='update-form' action={`/app/todo/update/${props.id}`} method='POST'>
-            <a href={`/app/todo/close/${props.id}`} />
-            <input className='edit' name='text' defaultValue={props.text} />
+            <input className='edit' name='text' defaultValue={props.text} autoFocus />
             <button type='submit' />
           </form>
         )}

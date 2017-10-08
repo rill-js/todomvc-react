@@ -19,16 +19,6 @@ export function openById ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Closes an open todo.
-export function closeById ({ req, res, session }) {
-  const todos = session.get('todos') || []
-  const todo = todos.find(todo => todo.id === req.params.id)
-  if (!todo) return
-  todo.editing = false
-  session.set('todos', todos)
-  res.redirect('back')
-}
-
 // Update an existing todo.
 export function updateById ({ req, res, session }) {
   const todos = session.get('todos') || []

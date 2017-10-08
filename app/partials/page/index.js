@@ -10,7 +10,7 @@ export default class Page extends Component {
     const { context, props } = this
     const { locals } = context
 
-    return <html lang='en'>
+    return <html lang='en' data-framework='rill'>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
