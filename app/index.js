@@ -14,6 +14,7 @@ import body from '@rill/body'
 import session from '@rill/session'
 import redirect from '@rill/redirect'
 import unhandled from '@rill/unhandled'
+import errorHandlerMiddleware from './middleware/error-handler'
 import preloadMiddleware from './middleware/preload'
 import controllers from './controllers'
 import views from './views'
@@ -32,8 +33,9 @@ export default router()
   .use(expose())
   .use(react())
   .use(unhandled(redirect('/404')))
-  .at('/app/*', controllers)
+  .use(errorHandlerMiddleware)
   .use(preloadMiddleware)
+  .at('/app/*', controllers)
   .get(views)
   .listen({ port: 8081 }, () => {
     if (!process.browser && process.env.NODE_ENV === 'production') {

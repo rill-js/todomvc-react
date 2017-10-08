@@ -6,6 +6,7 @@
   "dependencies": {
     "@rill/body": "^1.2.2",
     "@rill/compress": "^1.0.4",
+    "@rill/error": "^1.2.0",
     "@rill/etag": "^1.1.1",
     "@rill/expose": "^1.0.0",
     "@rill/fresh": "^1.0.0",

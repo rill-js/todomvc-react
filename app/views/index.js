@@ -2,9 +2,11 @@ import router from 'rill'
 import { wrap } from '@rill/react'
 import Page from '../partials/page'
 import homePage from './home'
-import notFoundPage from './not-found'
+import errorPage from './500'
+import missingPage from './404'
 
 export default router()
   .get(wrap(Page)) // Wrap all pages with the <Page> component.
-  .get('/404', notFoundPage)
+  .get('/500', errorPage)
+  .get('/404', missingPage)
   .get('/:filter(all|pending|completed)?', homePage)
