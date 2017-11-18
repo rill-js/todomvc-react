@@ -1,6 +1,8 @@
-import uid from 'uid'
+import uid from 'cuid'
 
-// Create a new todo.
+/**
+ * Creates a new TODO.
+ */
 export function create ({ req, res, session }) {
   const todos = session.get('todos') || []
   if (!req.body.text) return
@@ -9,7 +11,9 @@ export function create ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Opens a todo to be updated.
+/**
+ * Opens a todo to be updated.
+ */
 export function openById ({ req, res, session }) {
   const todos = session.get('todos') || []
   const todo = todos.find(todo => todo.id === req.params.id)
@@ -19,7 +23,9 @@ export function openById ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Update an existing todo.
+/**
+ * Update an existing todo.
+ */
 export function updateById ({ req, res, session }) {
   const todos = session.get('todos') || []
   const todo = todos.find(todo => todo.id === req.params.id)
@@ -30,7 +36,9 @@ export function updateById ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Toggles a todo's completion.
+/**
+ * Toggles a todo's completion.
+ */
 export function toggleById ({ req, res, session }) {
   const todos = session.get('todos') || []
   const todo = todos.find(todo => todo.id === req.params.id)
@@ -40,7 +48,9 @@ export function toggleById ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Toggles all todos completion.
+/**
+ * Toggles all todos completion.
+ */
 export function toggleAll ({ req, res, session }) {
   const todos = session.get('todos') || []
   todos.forEach(todo => { todo.completed = !todo.completed })
@@ -48,7 +58,9 @@ export function toggleAll ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Removes an existing todo.
+/**
+ * Removes an existing todo.
+ */
 export function removeById ({ req, res, session }) {
   const todos = session.get('todos') || []
   todos.splice(todos.findIndex(todo => todo.id === req.params.id), 1)
@@ -56,7 +68,9 @@ export function removeById ({ req, res, session }) {
   res.redirect('back')
 }
 
-// Removes all completed todos.
+/**
+ * Removes all completed todos.
+ */
 export function removeCompleted ({ req, res, session }) {
   const todos = session.get('todos') || []
   session.set('todos', todos.filter(todo => !todo.completed))

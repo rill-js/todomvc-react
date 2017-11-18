@@ -1,5 +1,5 @@
 import ms from 'ms'
-import router from 'rill'
+import Router from 'rill'
 import helmet from '@rill/helmet'
 import fresh from '@rill/fresh'
 import etag from '@rill/etag'
@@ -19,14 +19,14 @@ import preloadMiddleware from './middleware/preload'
 import controllers from './controllers'
 import views from './views'
 
-export default router()
+export default new Router()
   .use(helmet())
   .use(fresh())
   .use(etag())
   .use(compress())
   .get('/polyfill.js', polyfill())
   .get(serve('build/public', { gzip: true, cache: `${ms('30 days')}; immutable` }))
-  .use(progress({ spinner: false, color: '#009fe2' }))
+  .use(progress({ spinner: false, color: 'rgba(175, 47, 47, .3)' }))
   .use(body())
   .use(session())
   .use(logger())

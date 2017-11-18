@@ -1,10 +1,10 @@
-import router from 'rill'
+import Router from 'rill'
 import * as todoCtrl from './todos'
 
 // Create a nested rill router for the controller routes.
-export default router()
+export default new Router()
   // Created a nested prefixed router for todo controls.
-  .at('/todo/*', router()
+  .at('/todo/*', new Router()
     .post('/create', todoCtrl.create)
     .get('/open/:id', todoCtrl.openById)
     .post('/update/:id', todoCtrl.updateById)

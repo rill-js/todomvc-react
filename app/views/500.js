@@ -6,6 +6,7 @@ import React from 'react'
 export default async ({ req, res, locals }) => {
   const { message } = req.query
   locals.title = `Todos: Error`
+  res.status = 500
   res.body = (
     <div>
       <footer className='info'>

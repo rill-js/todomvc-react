@@ -1,11 +1,11 @@
-import router from 'rill'
+import Router from 'rill'
 import { wrap } from '@rill/react'
 import Page from '../partials/page'
 import homePage from './home'
 import errorPage from './500'
 import missingPage from './404'
 
-export default router()
+export default new Router()
   .get(wrap(Page)) // Wrap all pages with the <Page> component.
   .get('/500', errorPage)
   .get('/404', missingPage)

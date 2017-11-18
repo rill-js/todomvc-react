@@ -5,9 +5,10 @@ import React from 'react'
  */
 export default async ({ res, locals }) => {
   locals.title = `Todos: Page not found`
+  res.status = 404
   res.body = (
     <div>
-      <footer className='info'>
+      <footer id='info' className='info'>
         <h3>The requested page could not be found.</h3>
         <h2><a href='/'>Click here to go back</a></h2>
         <p>Template by <a href='http://sindresorhus.com'>Sindre Sorhus</a></p>
