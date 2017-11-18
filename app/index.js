@@ -16,8 +16,8 @@ import redirect from '@rill/redirect'
 import unhandled from '@rill/unhandled'
 import errorHandlerMiddleware from './middleware/error-handler'
 import preloadMiddleware from './middleware/preload'
-import controllers from './controllers'
-import views from './views'
+import actions from './actions'
+import pages from './pages'
 
 export default new Router()
   .use(helmet())
@@ -35,8 +35,8 @@ export default new Router()
   .use(unhandled(redirect('/404')))
   .use(errorHandlerMiddleware)
   .use(preloadMiddleware)
-  .at('/app/*', controllers)
-  .get(views)
+  .at('/app/*', actions)
+  .get(pages)
   .listen({ port: 8081 }, () => {
     if (!process.browser && process.env.NODE_ENV === 'production') {
       process.stdout.write('server: Started at `http://localhost:8080`.')

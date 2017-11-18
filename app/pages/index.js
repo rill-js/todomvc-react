@@ -1,6 +1,6 @@
 import Router from 'rill'
 import { wrap } from '@rill/react'
-import Page from '../partials/page'
+import Page from '../components/page'
 import homePage from './home'
 import errorPage from './500'
 import missingPage from './404'

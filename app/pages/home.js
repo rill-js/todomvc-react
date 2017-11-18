@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../partials/header'
-import TodoList from '../partials/todo-list'
-import Footer from '../partials/footer'
+import Header from '../components/header'
+import TodoList from '../components/todo-list'
+import Footer from '../components/footer'
 
 /**
  * Route handler for rendering the home page.
