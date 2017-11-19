@@ -37,9 +37,9 @@ export default new Router()
   .use(preloadMiddleware)
   .at('/app/*', actions)
   .get(pages)
-  .listen({ port: 8081 }, () => {
+  .listen({ port: process.env.PORT || 8080 }, function () {
     if (!process.browser && process.env.NODE_ENV === 'production') {
-      process.stdout.write('server: Started at `http://localhost:8080`.')
+      console.log(`Server started on port '${this.address().port}'.`)
       process.send && process.send('online')
     }
   })

@@ -2,6 +2,7 @@ import React from 'react'
 
 /**
  * Route handler for rendering the 404 page.
+ * @param {Rill.Context} options
  */
 export default async ({ res, locals }) => {
   locals.title = `Todos: Page not found`

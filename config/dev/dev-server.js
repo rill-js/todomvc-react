@@ -6,6 +6,9 @@ const DevServer = require('webpack-dev-server')
 const configs = require('./webpack.config')
 const spawnedServer = configs.spawnedServer
 const compiler = webpack(configs)
+const PORT = process.env.PORT || 8080 // Default to port 8080 on dev server.
+process.env.PORT = 0 // Start spawned server on any available port.
+
 const server = new DevServer(compiler, {
   quiet: true,
   inline: true,
@@ -24,9 +27,9 @@ const server = new DevServer(compiler, {
       else spawnedServer.once('listening', next)
     })
   }
-}).listen(8080)
+}).listen(PORT)
 
 compiler.apply(new FriendlyErrorPlugin())
 spawnedServer.once('listening', () => {
-  console.log(`Development Server running on port ${server.address().port}\n`)
+  console.log(`DevServer started on port '${server.address().port}'.\n`)
 })

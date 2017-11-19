@@ -17,8 +17,8 @@
     "@rill/react": "^7.0.0",
     "@rill/redirect": "^1.0.0",
     "@rill/session": "^10.0.0",
-    "@rill/static": "^2.0.0",
-    "@rill/unhandled": "^1.0.0",
+    "@rill/static": "^2.1.0",
+    "@rill/unhandled": "^1.1.0",
     "auto-sni": "^2.3.2",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
@@ -65,6 +65,7 @@
   ],
   "license": "MIT",
   "main": "build/index.js",
+  "private": true,
   "scripts": {
     "build": "webpack --progress --config ./config/prod/webpack.config.js",
     "precommit": "npm run build && git add ./build --all",
