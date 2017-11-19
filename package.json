@@ -1,6 +1,6 @@
 {
   "name": "@rill/todomvc-example",
-  "description": "Isomorphic TodoMVC example with Rill",
+  "description": "Isomorphic TodoMVC example with Rill & React",
   "version": "2.0.0",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "dependencies": {
