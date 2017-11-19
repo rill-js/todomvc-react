@@ -1,4 +1,4 @@
-# Rill • [TodoMVC](http://todomvc.com)
+# Rill & React • [TodoMVC](http://todomvc.com)
 
 ## Why Rill
 
