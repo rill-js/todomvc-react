@@ -47,6 +47,7 @@
     "husky": "^0.14.1",
     "ignore-emit-webpack-plugin": "^0.2.1",
     "imagemin-webpack-plugin": "^1.4.4",
+    "offline-plugin": "^4.8.4",
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",

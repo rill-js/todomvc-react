@@ -7,11 +7,11 @@ export default class TodoItem extends Component {
     return (
       <li className={cx({ completed: props.completed, editing: props.editing })}>
         <div className='view'>
-          <a href={`/app/todo/toggle/${props.id}`}>
+          <a href={`/app/todo/toggle/${props.id}`} aria-label='Toggle Todo'>
             <input className='toggle' type='checkbox' defaultChecked={props.completed} />
             <label />
           </a>
-          <a href={`/app/todo/open/${props.id}`}><label>{props.text}</label></a>
+          <a href={`/app/todo/open/${props.id}`} aria-label='Edit Todo'><label>{props.text}</label></a>
           <form action={`/app/todo/remove/${props.id}`}>
             <button className='destroy' type='submit' />
           </form>

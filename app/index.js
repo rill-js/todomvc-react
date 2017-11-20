@@ -43,3 +43,7 @@ export default new Router()
       process.send && process.send('online')
     }
   })
+
+if (process.browser && process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install()
+}

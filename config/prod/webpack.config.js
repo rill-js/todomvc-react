@@ -8,6 +8,7 @@ const MinifyJSPlugin = require('babili-webpack-plugin')
 const MinifyCSSPlugin = require('csso-webpack-plugin').default
 const MinifyImgPlugin = require('imagemin-webpack-plugin').default
 const CompressionPlugin = require('compression-webpack-plugin')
+const OfflinePlugin = require('offline-plugin');
 
 const ROOT_PATH = path.join(__dirname, '../..')
 const ENTRY_FILE = path.join(ROOT_PATH, 'app/index.js')
@@ -108,11 +109,26 @@ module.exports = [
         'process.env.NODE_ENV': '"production"',
         'process.browser': true
       }),
+      new webpack.optimize.ModuleConcatenationPlugin(),
       new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
       new MinifyJSPlugin(),
       new MinifyCSSPlugin(),
       new MinifyImgPlugin(),
-      new CompressionPlugin()
+      new CompressionPlugin(),
+      new OfflinePlugin({
+        autoUpdate: true,
+        safeToUseOptionalCaches: true,
+        excludes: ['*.map.*', '*.map', '*.gz'],
+        externals: ['/'],
+        caches: {
+          main: [':rest:', '/'],
+          additional: ['*.chunk.js']
+        },
+        ServiceWorker: {
+          navigateFallbackURL: '/',
+          minify: true
+        }
+      })
     ]
   })
 ]

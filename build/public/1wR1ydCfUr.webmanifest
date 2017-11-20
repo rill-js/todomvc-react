@@ -1,0 +1,11 @@
+{
+  "name": "TodoMVC - Rill & React",
+  "short_name": "Rill",
+  "start_url": ".",
+  "display": "minimal-ui",
+  "background_color": "#af2f2f",
+  "description": "Todo MVC app using Rill and React.",
+  "related_applications": [{
+    "platform": "web"
+  }]
+}
