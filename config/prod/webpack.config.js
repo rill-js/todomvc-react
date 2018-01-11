@@ -32,9 +32,7 @@ const createConfig = opts => Object.assign(opts, {
             useBuiltIns: true,
             modules: false,
             loose: true,
-            target: opts.name === 'Server'
-              ? { node: 'current' }
-              : { browsers: ['Last 2 Versions'] }
+            target: { node: opts.target !== 'web' && 'current' }
           }],
           'babel-preset-react'
         ]
@@ -62,7 +60,7 @@ const createConfig = opts => Object.assign(opts, {
       options: {
         publicPath: '/',
         name: '[hash:base64:10].[ext]',
-        emitFile: opts.name === 'Browser'
+        emitFile: opts.target === 'web'
       }
     }]
   }

@@ -1,0 +1,6 @@
+[production]
+last 2 version
+ie 10
+
+[development]
+last 1 version

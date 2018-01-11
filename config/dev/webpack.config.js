@@ -35,9 +35,7 @@ const createConfig = opts => Object.assign(opts, {
             useBuiltIns: true,
             modules: false,
             loose: true,
-            target: opts.name === 'Server'
-              ? { node: 'current' }
-              : { browsers: ['Last 1 Versions'] }
+            target: { node: opts.target !== 'web' && 'current' }
           }],
           'babel-preset-react'
         ]
