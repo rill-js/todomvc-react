@@ -20,7 +20,6 @@ export default class Page extends Component {
       </head>
       <body>
         <div id='root'>{props.children}</div>
-        <script src='/polyfill.js' />
         <script src='/index.js' />
       </body>
     </html>

@@ -2,15 +2,17 @@
 
 const path = require('path')
 const webpack = require('webpack')
-const ExtractCSSPlugin = require('extract-text-webpack-plugin')
+const ExtractCSSPlugin = require('mini-css-extract-plugin')
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin')
 const SpawnServerPlugin = require('spawn-server-webpack-plugin')
+const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 
 const ROOT_PATH = path.join(__dirname, '../..')
 const ENTRY_FILE = path.join(ROOT_PATH, 'app/index.js')
 const DIST_PATH = path.join(ROOT_PATH, 'build')
 const PUBLIC_PATH = path.join(DIST_PATH, 'public')
 
+const friendlyErrors = new FriendlyErrorPlugin();
 const spawnedServer = new SpawnServerPlugin({ args: [
   '-r', path.join(__dirname, './pretty-errors')
 ] })
@@ -19,6 +21,7 @@ const spawnedServer = new SpawnServerPlugin({ args: [
  * Shared config (server and browser).
  */
 const createConfig = opts => Object.assign(opts, {
+  mode: 'development',
   bail: true,
   devtool: 'cheap-module-inline-source-map',
   module: {
@@ -29,23 +32,23 @@ const createConfig = opts => Object.assign(opts, {
       options: {
         babelrc: false,
         cacheDirectory: true,
-        plugins: [['transform-runtime', { 'polyfill': false }]],
+        plugins: [['@babel/plugin-transform-runtime']],
         presets: [
-          ['babel-preset-env', {
-            useBuiltIns: true,
+          ['@babel/preset-env', {
+            useBuiltIns: "usage",
             modules: false,
             loose: true,
-            target: opts.name === 'Server'
+            targets: opts.name === 'Server'
               ? { node: 'current' }
               : { browsers: ['Last 1 Versions'] }
           }],
-          'babel-preset-react'
+          '@babel/preset-react'
         ]
       }
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
-      use: ExtractCSSPlugin.extract({ use: [{
+      use: [ExtractCSSPlugin.loader, {
         loader: 'css-loader',
         options: {
           modules: false,
@@ -58,7 +61,7 @@ const createConfig = opts => Object.assign(opts, {
           sourceMap: true,
           config: { path: require.resolve('./postcss.config.js') }
         }
-      }] })
+      }]
     }, {
       test: file => !/\.(js(x|on)?|css)$/.test(file),
       loader: 'file-loader',
@@ -86,13 +89,13 @@ module.exports = exports = [
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': undefined,
         'process.browser': undefined
       }),
       new webpack.BannerPlugin({ banner: 'require("source-map-support").install({ hookRequire: true })', raw: true }),
       new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
       new IgnoreEmitPlugin('index.css'),
-      spawnedServer
+      spawnedServer,
+      friendlyErrors
     ]
   }),
   createConfig({
@@ -111,7 +114,8 @@ module.exports = exports = [
         'process.env.NODE_ENV': undefined,
         'process.browser': true
       }),
-      new ExtractCSSPlugin({ filename: 'index.css', allChunks: true })
+      new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
+      friendlyErrors
     ]
   })
 ]

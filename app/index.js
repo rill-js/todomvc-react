@@ -4,7 +4,6 @@ import helmet from '@rill/helmet'
 import fresh from '@rill/fresh'
 import etag from '@rill/etag'
 import compress from '@rill/compress'
-import polyfill from '@rill/polyfill'
 import serve from '@rill/static'
 import progress from '@rill/progress'
 import logger from '@rill/logger'
@@ -24,7 +23,6 @@ export default new Router()
   .use(fresh())
   .use(etag())
   .use(compress())
-  .get('/polyfill.js', polyfill())
   .get(serve('build/public', { gzip: true, cache: `${ms('30 days')}; immutable` }))
   .use(progress({ spinner: false, color: 'rgba(175, 47, 47, .3)' }))
   .use(body())

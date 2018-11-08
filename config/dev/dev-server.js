@@ -1,7 +1,6 @@
 require('./pretty-errors')
 
 const webpack = require('webpack')
-const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 const DevServer = require('webpack-dev-server')
 const configs = require('./webpack.config')
 const spawnedServer = configs.spawnedServer
@@ -29,7 +28,6 @@ const server = new DevServer(compiler, {
   }
 }).listen(PORT)
 
-compiler.apply(new FriendlyErrorPlugin())
 spawnedServer.once('listening', () => {
   console.log(`DevServer started on port '${server.address().port}'.\n`)
 })

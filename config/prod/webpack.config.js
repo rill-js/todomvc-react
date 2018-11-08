@@ -2,9 +2,9 @@
 
 const path = require('path')
 const webpack = require('webpack')
-const ExtractCSSPlugin = require('extract-text-webpack-plugin')
+const ExtractCSSPlugin = require('mini-css-extract-plugin')
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin')
-const MinifyJSPlugin = require('babili-webpack-plugin')
+const MinifyJSPlugin = require('babel-minify-webpack-plugin')
 const MinifyCSSPlugin = require('csso-webpack-plugin').default
 const MinifyImgPlugin = require('imagemin-webpack-plugin').default
 const CompressionPlugin = require('compression-webpack-plugin')
@@ -17,7 +17,11 @@ const PUBLIC_PATH = path.join(DIST_PATH, 'public')
  * Shared config (server and browser).
  */
 const createConfig = opts => Object.assign(opts, {
+  mode: 'production',
   bail: true,
+  optimization: {
+    minimize: false // We use babel-minify instead.
+  },
   module: {
     rules: [{
       test: /\.js$/,
@@ -25,23 +29,26 @@ const createConfig = opts => Object.assign(opts, {
       exclude: /node_modules/,
       options: {
         babelrc: false,
-        plugins: [['transform-runtime', { 'polyfill': false }]],
+        plugins: [['@babel/plugin-transform-runtime']],
         presets: [
-          ['babel-preset-env', {
-            useBuiltIns: true,
+          ['@babel/preset-env', {
+            useBuiltIns: "usage",
             modules: false,
             loose: true,
-            target: opts.name === 'Server'
+            targets: opts.name === 'Server'
               ? { node: 'current' }
-              : { browsers: ['Last 2 Versions'] }
+              : { browsers: [
+                'last 1 version',
+                'not dead'
+              ] }
           }],
-          'babel-preset-react'
+          '@babel/preset-react'
         ]
       }
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
-      use: ExtractCSSPlugin.extract({ use: [{
+      use: [ExtractCSSPlugin.loader, {
         loader: 'css-loader',
         options: {
           modules: false,
@@ -54,7 +61,7 @@ const createConfig = opts => Object.assign(opts, {
           sourceMap: true,
           config: { path: require.resolve('./postcss.config.js') }
         }
-      }] })
+      }]
     }, {
       test: file => !/\.(js(x|on)?|css)$/.test(file),
       loader: 'file-loader',
@@ -105,11 +112,10 @@ module.exports = [
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"',
         'process.browser': true
       }),
       new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
-      new MinifyJSPlugin(),
+      new MinifyJSPlugin({ mangle: { topLevel: true } }),
       new MinifyCSSPlugin(),
       new MinifyImgPlugin(),
       new CompressionPlugin()
