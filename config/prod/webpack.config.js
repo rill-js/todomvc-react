@@ -2,6 +2,7 @@
 
 const path = require('path')
 const webpack = require('webpack')
+const AssetsPlugin = require('assets-webpack-plugin')
 const ExtractCSSPlugin = require('mini-css-extract-plugin')
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin')
 const MinifyJSPlugin = require('babel-minify-webpack-plugin')
@@ -9,6 +10,7 @@ const MinifyCSSPlugin = require('csso-webpack-plugin').default
 const MinifyImgPlugin = require('imagemin-webpack-plugin').default
 const CompressionPlugin = require('compression-webpack-plugin')
 
+const HASH = '[hash:10]';
 const ROOT_PATH = path.join(__dirname, '../..')
 const ENTRY_FILE = path.join(ROOT_PATH, 'app/index.js')
 const DIST_PATH = path.join(ROOT_PATH, 'build')
@@ -29,7 +31,10 @@ const createConfig = opts => Object.assign(opts, {
       exclude: /node_modules/,
       options: {
         babelrc: false,
-        plugins: [['@babel/plugin-transform-runtime']],
+        plugins: [
+          '@babel/plugin-syntax-dynamic-import',
+          '@babel/plugin-transform-runtime'
+        ],
         presets: [
           ['@babel/preset-env', {
             useBuiltIns: "usage",
@@ -67,7 +72,7 @@ const createConfig = opts => Object.assign(opts, {
       loader: 'file-loader',
       options: {
         publicPath: '/',
-        name: '[hash:base64:10].[ext]',
+        name: `${HASH}.[ext]`,
         emitFile: opts.name === 'Browser'
       }
     }]
@@ -86,6 +91,7 @@ module.exports = [
       pathinfo: false,
       path: DIST_PATH,
       filename: 'index.js',
+      chunkFilename: `[name].${HASH}.js`,
       libraryTarget: 'commonjs2'
     },
     plugins: [
@@ -93,8 +99,14 @@ module.exports = [
         'process.env.NODE_ENV': '"production"',
         'process.browser': undefined
       }),
-      new webpack.BannerPlugin({ banner: 'require("source-map-support").install({ hookRequire: true })', raw: true }),
-      new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
+      new webpack.BannerPlugin({
+        banner: 'require("source-map-support").install({ hookRequire: true })',
+        raw: true
+      }),
+      new ExtractCSSPlugin({
+        filename: 'index.css',
+        allChunks: true
+      }),
       new IgnoreEmitPlugin('index.css')
     ]
   }),
@@ -107,15 +119,28 @@ module.exports = [
       pathinfo: false,
       publicPath: '/',
       path: PUBLIC_PATH,
-      filename: 'index.js',
+      filename: `index.${HASH}.js`,
+      chunkFilename: `[name].${HASH}.js`,
       libraryTarget: 'var'
     },
     plugins: [
       new webpack.DefinePlugin({
         'process.browser': true
       }),
-      new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
-      new MinifyJSPlugin({ mangle: { topLevel: true } }),
+      new AssetsPlugin({
+        filename: 'assets.json',
+        includeAllFileTypes: false,
+        useCompilerPath: true
+      }),
+      new ExtractCSSPlugin({
+        filename: `index.${HASH}.css`,
+        allChunks: true
+      }),
+      new MinifyJSPlugin({
+        mangle: {
+          topLevel: true
+        }
+      }),
       new MinifyCSSPlugin(),
       new MinifyImgPlugin(),
       new CompressionPlugin()

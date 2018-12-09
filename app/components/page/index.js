@@ -1,5 +1,6 @@
 import './style.css'
 import React, { Component } from 'react'
+import ASSETS from '../../assets'
 
 /**
  * This is an example wrapper.
@@ -16,11 +17,11 @@ export default class Page extends Component {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>{locals.title}</title>
         <meta name='description' content='Todo MVC app using Rill and React.' />
-        <link rel='stylesheet' href='/index.css' />
+        <link id="css" rel='stylesheet' href={ASSETS.main.css} />
       </head>
       <body>
         <div id='root'>{props.children}</div>
-        <script src='/index.js' />
+        <script id="js" src={ASSETS.main.js} />
       </body>
     </html>
   }

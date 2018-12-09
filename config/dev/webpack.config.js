@@ -2,11 +2,13 @@
 
 const path = require('path')
 const webpack = require('webpack')
+const AssetsPlugin = require('assets-webpack-plugin')
 const ExtractCSSPlugin = require('mini-css-extract-plugin')
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin')
 const SpawnServerPlugin = require('spawn-server-webpack-plugin')
 const FriendlyErrorPlugin = require('friendly-errors-webpack-plugin')
 
+const HASH = '[hash:10]';
 const ROOT_PATH = path.join(__dirname, '../..')
 const ENTRY_FILE = path.join(ROOT_PATH, 'app/index.js')
 const DIST_PATH = path.join(ROOT_PATH, 'build')
@@ -32,7 +34,10 @@ const createConfig = opts => Object.assign(opts, {
       options: {
         babelrc: false,
         cacheDirectory: true,
-        plugins: [['@babel/plugin-transform-runtime']],
+        plugins: [
+          '@babel/plugin-syntax-dynamic-import',
+          '@babel/plugin-transform-runtime'
+        ],
         presets: [
           ['@babel/preset-env', {
             useBuiltIns: "usage",
@@ -67,7 +72,7 @@ const createConfig = opts => Object.assign(opts, {
       loader: 'file-loader',
       options: {
         publicPath: '/',
-        name: '[hash:base64:10].[ext]',
+        name: `${HASH}.[ext]`,
         emitFile: opts.name === 'Browser'
       }
     }]
@@ -85,14 +90,21 @@ module.exports = exports = [
       pathinfo: true,
       path: DIST_PATH,
       filename: 'index.js',
+      chunkFilename: `[name].${HASH}.js`,
       libraryTarget: 'commonjs2'
     },
     plugins: [
       new webpack.DefinePlugin({
         'process.browser': undefined
       }),
-      new webpack.BannerPlugin({ banner: 'require("source-map-support").install({ hookRequire: true })', raw: true }),
-      new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
+      new webpack.BannerPlugin({
+        banner: 'require("source-map-support").install({ hookRequire: true })',
+        raw: true
+      }),
+      new ExtractCSSPlugin({
+        filename: 'index.css',
+        allChunks: true
+      }),
       new IgnoreEmitPlugin('index.css'),
       spawnedServer,
       friendlyErrors
@@ -106,7 +118,8 @@ module.exports = exports = [
       pathinfo: true,
       publicPath: '/',
       path: PUBLIC_PATH,
-      filename: 'index.js',
+      filename: `index.${HASH}.js`,
+      chunkFilename: `[name].${HASH}.js`,
       libraryTarget: 'var'
     },
     plugins: [
@@ -114,7 +127,15 @@ module.exports = exports = [
         'process.env.NODE_ENV': undefined,
         'process.browser': true
       }),
-      new ExtractCSSPlugin({ filename: 'index.css', allChunks: true }),
+      new AssetsPlugin({
+        filename: 'assets.json',
+        includeAllFileTypes: false,
+        useCompilerPath: true
+      }),
+      new ExtractCSSPlugin({
+        filename: `index.${HASH}.css`,
+        allChunks: true
+      }),
       friendlyErrors
     ]
   })
